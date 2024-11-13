@@ -1,0 +1,130 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body & Layout */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #000;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Header */
+header {
+    width: 100%;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 3em;
+    color: #fff;
+}
+
+/* Projects Section */
+.projects-section {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.projects-container {
+    display: flex;
+    width: 100%;
+}
+
+.projects-left, .projects-right {
+    width: 48%;
+    padding: 20px;
+}
+
+.projects-left h2, .projects-right h2 {
+    font-size: 2.5em;
+    margin-bottom: 30px;
+}
+
+.project {
+    margin-bottom: 30px;
+}
+
+.project-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.project-title h3 {
+    font-size: 1.8em;
+}
+
+.project-title a {
+    color: #4caf50;
+    text-decoration: none;
+}
+
+.project-title a:hover {
+    text-decoration: underline;
+}
+
+.status {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #4caf50; /* Green for active symbol */
+}
+
+.status-text {
+    margin-left: 10px;
+    color: #4caf50;
+}
+
+.build-symbol {
+    font-size: 1.5em;
+    margin-left: 10px;
+    color: #ffa500; /* Orange color for build symbol */
+}
+
+.project p {
+    font-size: 1.2em;
+    color: #ddd;
+    line-height: 1.6;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 1024px) {
+    .projects-container {
+        flex-direction: column;
+    }
+
+    .projects-left, .projects-right {
+        width: 100%;
+    }
+
+    .project-title h3 {
+        font-size: 1.6em;
+    }
+}
+
+@media (max-width: 600px) {
+    .projects-left h2, .projects-right h2 {
+        font-size: 2em;
+    }
+
+    .project-title h3 {
+        font-size: 1.4em;
+    }
+
+    .project p {
+        font-size: 1em;
+    }
+}
