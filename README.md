@@ -1,1 +1,1 @@
-# portfolio
+Blog and protfolio app
