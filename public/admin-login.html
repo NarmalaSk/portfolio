@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login</title>
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    
+    .container {
+      margin-top: 50px;
+      padding: 20px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .error {
+      color: red;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Admin Login</h2>
+    <form id="login-form" method="POST" action="/admin-login">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required placeholder="Enter username">
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required placeholder="Enter password">
+
+      <button type="submit">Login</button>
+    </form>
+
+    <p class="error" id="error-message"></p>
+  </div>
+
+  <script>
+    // Optional client-side form validation
+    document.getElementById('login-form').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent the form from submitting until validation
+
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      const errorMessage = document.getElementById('error-message');
+
+      // Validate the form fields
+      if (username === '' || password === '') {
+        errorMessage.textContent = 'Please fill in both fields';
+        return;
+      }
+
+      // If all fields are valid, send the POST request to server
+      fetch('/admin-login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      })
+      .then(response => {
+        if (response.ok) {
+          window.location.href = '/admin-dashboard'; // Redirect to dashboard
+        } else {
+          response.json().then(data => {
+            errorMessage.textContent = data.message || 'Invalid credentials';
+          });
+        }
+      })
+      .catch(error => {
+        errorMessage.textContent = 'Something went wrong';
+      });
+    });
+  </script>
+
+</body>
+</html>

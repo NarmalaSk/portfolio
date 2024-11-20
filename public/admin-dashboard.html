@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        .container {
+            padding: 20px;
+        }
+        .button {
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .edit-button, .delete-button {
+            padding: 5px 10px;
+            color: white;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .edit-button:hover {
+            background-color: #45a049;
+        }
+        .delete-button {
+            background-color: #f44336;
+        }
+        .delete-button:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Admin Dashboard</h1>
+    </header>
+
+    <div class="container">
+        <a href="/projects" class="button">Back to Projects</a>
+        <a href="/logout" class="button">Logout</a>
+
+        <h2>Manage Blog Posts</h2>
+        
+        <!-- Blog List Table -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Slug</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Example of a blog entry, you will need to dynamically generate this with server-side code -->
+                <tr>
+                    <td>Project 1</td>
+                    <td>project-1</td>
+                    <td>
+                        <a href="/admin-dashboard/edit/project-1" class="edit-button">Edit</a>
+                        <button class="delete-button" onclick="deleteBlog('project-1')">Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Project 2</td>
+                    <td>project-2</td>
+                    <td>
+                        <a href="/admin-dashboard/edit/project-2" class="edit-button">Edit</a>
+                        <button class="delete-button" onclick="deleteBlog('project-2')">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Function to handle blog deletion (you can expand this logic as needed)
+        function deleteBlog(slug) {
+            if (confirm(`Are you sure you want to delete ${slug}?`)) {
+                // Implement the deletion functionality (e.g., making an API request to delete the blog)
+                alert(`${slug} has been deleted!`);
+            }
+        }
+    </script>
+
+</body>
+</html>
