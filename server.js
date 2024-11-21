@@ -37,42 +37,69 @@ app.get('/', (req, res) => {
 app.get('/projects', async (req, res) => {
   try {
     const blogs = await Blog.find(); // Fetch blogs from MongoDB
-    let blogListHtml = '<h1>Projects</h1>';
-    
+    let blogListHtml = `
+      <!DOCTYPE html>
+      <html lang="en">
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Projects</title>
+          <link rel="stylesheet" href="/projects.css"> <!-- Link to the new projects.css -->
+        </head>
+        <body>
+          <header>
+            <div class="navbar">
+              <a href="/" class="logo">Tech Folio</a>
+              <nav>
+                <a href="/">Home</a>
+                <a href="/projects" class="active">Projects</a>
+                <a href="/newsletter">Newsletter</a>
+              </nav>
+            </div>
+          </header>
+          <main>
+            <section class="project-section">
+              <h1>Our Projects</h1>
+              <div class="projects-grid">
+    `;
+
     if (blogs.length > 0) {
-      blogListHtml += '<ul>';
       blogs.forEach(blog => {
         blogListHtml += `
-          <li>
-            <h2>${blog.title}</h2>
-            <p>${blog.description}</p>
-            <a href="/blog/${blog.slug}">Read More</a>
-          </li>
+          <div class="project-card">
+            <img src="https://via.placeholder.com/600x400" alt="Blog Image" class="project-image">
+            <div class="project-content">
+              <h2 class="project-title">${blog.title}</h2>
+              <p class="project-description">${blog.description}</p>
+              <a href="/blog/${blog.slug}" class="project-link">Read More</a>
+            </div>
+          </div>
         `;
       });
-      blogListHtml += '</ul>';
     } else {
       blogListHtml += '<p>No projects found.</p>';
     }
 
+    blogListHtml += `</div></section></main>`;
+    
     if (req.session.loggedIn) {
-      // If admin is logged in, add admin options
       blogListHtml += `
-        <h2>Admin Actions</h2>
-        <a href="/admin-dashboard" class="button">Admin Dashboard</a>
-        <a href="/logout" class="button">Logout</a>
+        <div class="admin-actions">
+          <a href="/admin-dashboard" class="button">Admin Dashboard</a>
+          <a href="/logout" class="button">Logout</a>
+        </div>
       `;
     } else {
-      // If admin is not logged in, show login option
       blogListHtml += '<a href="/admin-login" class="button">Admin Login</a>';
     }
 
+    blogListHtml += `</body></html>`;
     res.send(blogListHtml); // Send the complete HTML
   } catch (err) {
     res.status(500).json({ error: 'Error fetching blogs', details: err });
   }
 });
- 
+
 
 // Newsletter route
 app.get('/newsletter', (req, res) => {
