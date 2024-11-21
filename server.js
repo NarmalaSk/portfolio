@@ -33,42 +33,46 @@ app.get('/', (req, res) => {
 });
 
 // Projects route (links to blog page)
+// Projects route (links to blog page)
 app.get('/projects', async (req, res) => {
   try {
     const blogs = await Blog.find(); // Fetch blogs from MongoDB
     let blogListHtml = '<h1>Projects</h1>';
     
-    if (req.session.loggedIn) {
-      // If admin is logged in, show editable blog titles
-      blogListHtml += '<h2>Editable Blogs</h2>';
+    if (blogs.length > 0) {
       blogListHtml += '<ul>';
       blogs.forEach(blog => {
         blogListHtml += `
           <li>
-            <a href="/admin-dashboard/edit/${blog.slug}">Edit: ${blog.title}</a>
+            <h2>${blog.title}</h2>
+            <p>${blog.description}</p>
+            <a href="/blog/${blog.slug}">Read More</a>
           </li>
         `;
       });
       blogListHtml += '</ul>';
     } else {
-      // If admin is not logged in, show normal blog links
-      blogListHtml += '<ul>';
-      blogs.forEach(blog => {
-        blogListHtml += `
-          <li>
-            <a href="/blog/${blog.slug}">${blog.title}</a>
-          </li>
-        `;
-      });
-      blogListHtml += '</ul>';
+      blogListHtml += '<p>No projects found.</p>';
+    }
+
+    if (req.session.loggedIn) {
+      // If admin is logged in, add admin options
+      blogListHtml += `
+        <h2>Admin Actions</h2>
+        <a href="/admin-dashboard" class="button">Admin Dashboard</a>
+        <a href="/logout" class="button">Logout</a>
+      `;
+    } else {
+      // If admin is not logged in, show login option
       blogListHtml += '<a href="/admin-login" class="button">Admin Login</a>';
     }
 
-    res.send(blogListHtml); // Send the HTML list as the response
+    res.send(blogListHtml); // Send the complete HTML
   } catch (err) {
     res.status(500).json({ error: 'Error fetching blogs', details: err });
   }
 });
+
 
 // Newsletter route
 app.get('/newsletter', (req, res) => {
