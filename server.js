@@ -72,7 +72,7 @@ app.get('/projects', async (req, res) => {
     res.status(500).json({ error: 'Error fetching blogs', details: err });
   }
 });
-
+ 
 
 // Newsletter route
 app.get('/newsletter', (req, res) => {
