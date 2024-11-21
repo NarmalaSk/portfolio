@@ -53,7 +53,7 @@ app.get('/projects', async (req, res) => {
               <nav>
                 <a href="/">Home</a>
                 <a href="/projects" class="active">Projects</a>
-                <a href="/newsletter">Newsletter</a>
+                <a href="/public/Newsletter.html">Newsletter</a>
               </nav>
             </div>
           </header>
