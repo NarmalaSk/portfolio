@@ -67,7 +67,7 @@ app.get('/projects', async (req, res) => {
       blogs.forEach(blog => {
         blogListHtml += `
           <div class="project-card">
-            <img src="https://via.placeholder.com/600x400" alt="Blog Image" class="project-image">
+            <img src="${blog.coverImage}" alt="Cover Image" class="project-image"> <!-- Add the cover image -->
             <div class="project-content">
               <h2 class="project-title">${blog.title}</h2>
               <p class="project-description">${blog.description}</p>
