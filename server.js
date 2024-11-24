@@ -106,7 +106,7 @@ app.get('/projects', async (req, res) => {
 
 // Newsletter route
 app.get('/newsletter', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'newsletter.html'));  // Adjust based on your actual file structure
+  res.sendFile(path.join(__dirname, 'public', 'Newsletter.html'));  // Adjust based on your actual file structure
 });
 app.post('/newsletter/subscribe', async (req, res) => {
   const { email } = req.body;
