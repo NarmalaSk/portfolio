@@ -1,12 +1,13 @@
 const mongoose = require('mongoose');
 
-const blogSchema = new mongoose.Schema({
-  title: { type: String, required: true },
-  description: [{ type: String, required: true }],
-  slug: { type: String, required: true, unique: true },
-  coverImage: { type: String, required: true },  // Cover image URL
+const BlogSchema = new mongoose.Schema({
+  title: String,
+  description: String,
+  slug: String,
+  coverImage: {
+    type: String,
+    default: 'https://cdn.hashnode.com/res/hashnode/image/upload/v1729865212777/27993222-b7c9-4956-96b8-7192e6a11f71.jpeg?w=1600&h=840&fit=crop&crop=entropy&auto=compress,format&format=webp',
+  },
 });
 
-const Blog = mongoose.model('Blog', blogSchema);
-
-module.exports = Blog;
+module.exports = mongoose.model('Blog', BlogSchema);

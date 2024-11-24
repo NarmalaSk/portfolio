@@ -67,14 +67,17 @@ app.get('/projects', async (req, res) => {
       blogs.forEach(blog => {
         blogListHtml += `
           <div class="project-card">
-            <img src="${blog.coverImage}" alt="Cover Image" class="project-image"> <!-- Add the cover image -->
+            <img 
+              src="${blog.coverImage || 'https://cdn.hashnode.com/res/hashnode/image/upload/v1729865212777/27993222-b7c9-4956-96b8-7192e6a11f71.jpeg?w=1600&h=840&fit=crop&crop=entropy&auto=compress,format&format=webp'}" 
+              alt="Cover Image" 
+              class="project-image">
             <div class="project-content">
               <h2 class="project-title">${blog.title}</h2>
               <p class="project-description">${blog.description}</p>
               <a href="/blog/${blog.slug}" class="project-link">Read More</a>
             </div>
           </div>
-        `;
+        `;      
       });
     } else {
       blogListHtml += '<p>No projects found.</p>';
