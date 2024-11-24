@@ -108,6 +108,35 @@ app.get('/projects', async (req, res) => {
 app.get('/newsletter', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'newsletter.html'));  // Adjust based on your actual file structure
 });
+app.post('/newsletter/subscribe', async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    // Save email to MongoDB
+    const newSubscriber = new Newsletter({ email });
+    await newSubscriber.save();
+
+    res.status(201).send(`
+      <h1>Thank you for subscribing!</h1>
+      <p>We’ve added your email to our newsletter.</p>
+      <a href="/newsletter">Go Back</a>
+    `);
+  } catch (err) {
+    if (err.code === 11000) { // Duplicate email error
+      res.status(400).send(`
+        <h1>Subscription Failed</h1>
+        <p>The email is already subscribed.</p>
+        <a href="/newsletter">Try Again</a>
+      `);
+    } else {
+      res.status(500).send(`
+        <h1>Subscription Failed</h1>
+        <p>Something went wrong. Please try again later.</p>
+        <a href="/newsletter">Go Back</a>
+      `);
+    }
+  }
+});
 
 // Admin login route
 app.get('/admin-login', (req, res) => {
