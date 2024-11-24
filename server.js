@@ -112,7 +112,6 @@ app.post('/newsletter/subscribe', async (req, res) => {
   const { email } = req.body;
 
   try {
-    // Save email to MongoDB
     const newSubscriber = new Newsletter({ email });
     await newSubscriber.save();
 
@@ -122,7 +121,8 @@ app.post('/newsletter/subscribe', async (req, res) => {
       <a href="/newsletter">Go Back</a>
     `);
   } catch (err) {
-    if (err.code === 11000) { // Duplicate email error
+    console.error('Error saving email:', err); // Log the error to the console
+    if (err.code === 11000) {
       res.status(400).send(`
         <h1>Subscription Failed</h1>
         <p>The email is already subscribed.</p>
@@ -137,6 +137,7 @@ app.post('/newsletter/subscribe', async (req, res) => {
     }
   }
 });
+
 
 // Admin login route
 app.get('/admin-login', (req, res) => {
