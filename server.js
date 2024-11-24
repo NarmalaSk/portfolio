@@ -22,6 +22,7 @@ app.use(session({
 }));
 
 // Middleware to serve static files
+app.use(express.urlencoded({ extended: true })); // Parse URL-encoded form data
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json()); // Parse JSON request body
 
