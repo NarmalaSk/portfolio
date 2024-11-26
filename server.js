@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const path = require('path');
 const session = require('express-session');
 const Blog = require('./models/Blog');
+const Newsletter = require('./models/Newsletter');
 
 // MongoDB Atlas URI
 const uri = "mongodb+srv://shashinarmala29:LcnEks3kuaQLxgoH@cluster.go8c4.mongodb.net/blogDB?retryWrites=true&w=majority";
